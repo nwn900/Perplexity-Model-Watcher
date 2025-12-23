@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Model Watcher",
+  "version": "0.1.1",
+  "description": "Shows display_model and user_selected_model from page network responses and warns on mismatch.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "model-watcher@perplexity.extension",
+      "strict_min_version": "109.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.perplexity.ai/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_title": "Model Watcher",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page-probe.js"
+      ],
+      "matches": [
+        "https://*.perplexity.ai/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.perplexity.ai/*"
+      ],
+      "js": [
+        "interceptor.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
